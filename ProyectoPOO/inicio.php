@@ -39,7 +39,4 @@ echo "<br>Precio IVA incluido: ".$miJuego->getPrecioConIva()." euros";
 
 $miJuego->muestraResumen();
 echo "<br><hr><br>";
-
-// PRUEBA DE CLASE CLIENTE
-
 ?>

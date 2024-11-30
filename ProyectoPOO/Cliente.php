@@ -1,5 +1,4 @@
 <?php
-include_once "Soporte.php";
 class Cliente {
     public string $nombre;
     private int $numero;
