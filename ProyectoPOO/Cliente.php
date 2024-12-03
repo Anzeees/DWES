@@ -18,6 +18,7 @@ class Cliente {
 
     public function setNumero($numero){
         $this->numero = $numero;
+        return $this;
     }
 
     public function getNumSoportesAlquilados(){
@@ -33,20 +34,17 @@ class Cliente {
         return false;
     }
 
-    public function alquilar(Soporte $s):bool {
+    public function alquilar(Soporte $s):Cliente {
         if((!$this->tieneAlquilado($s))&&($this->numSoportesAlquilados<$this->maxAlquilerConcurrente)){
             array_push($this->soportesAlquilados,$s);
             $this->numSoportesAlquilados++;
             echo "<br>Alquiler ".$s->titulo. " ACEPTADO para ".$this->nombre;
-            return true;
         } else if($this->tieneAlquilado($s)){
             echo "<br>El usuario ".$this->nombre." ya tiene ".$s->titulo." alquilado";
-            return true;
         } else if($this->numSoportesAlquilados > $this->maxAlquilerConcurrente){
             echo "<br>El usuario ".$this->nombre." no puede hacer más alquileres";
-            return true;
         }
-        return false;
+        return $this;
     }
 
     public function devolver(int $numSoporte):bool {

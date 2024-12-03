@@ -75,6 +75,7 @@ class VideoClub{
         if (!$existeproducto){
             echo "El Soporte con el número ".$numeroSoporte." no está en tienda";
         }
+        return $this;
     }
 }
 ?>
