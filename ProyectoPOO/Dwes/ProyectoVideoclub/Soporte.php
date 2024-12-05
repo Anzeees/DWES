@@ -1,18 +1,25 @@
 <?php
+// Definimos Namespace
 namespace Dwes\ProyectoVideoclub;
+// Incluimos Clases/Interfaces
 include_once "Resumible.php";
+
+// Definición clase abstracta Soporte
 abstract class Soporte implements Resumible{
+    // ATRIBUTOS
     public string $titulo;
     protected int $numero;
     private float $precio;
     private static $IVA = 21;
 
+    // CONSTRUCTOR
     public function __construct($titulo,$numero,$precio){
         $this->titulo = $titulo;
         $this->numero = $numero;
         $this->precio = $precio;
     }
 
+    // GETTERS Y SETTERS
     public function getPrecio(){
         return $this->precio;
     }
@@ -25,6 +32,10 @@ abstract class Soporte implements Resumible{
         return $this->numero;
     }
 
+    /**
+     * Función muestraResumen
+     * Resumen: Título, Precio, PrecioConIva e IVA
+     */
     public function muestraResumen(){
         echo "<br>------------------------------------------------<br>";
         echo "<strong>Título: ".$this->titulo."</strong><br>";

@@ -1,30 +1,45 @@
 <?php
+// Definimos Namespace
 namespace Dwes\ProyectoVideoclub;
+// Incluimos Clases/Interfaces
 include_once "Soporte.php";
 include_once "Juego.php";
 include_once "CintaVideo.php";
 include_once "Dvd.php";
 include_once "Cliente.php";
+
+// Definición clase VideoClub
 class VideoClub{
+    // ATRIBUTOS
     private string $nombre;
     private $productos = [];
     private int $numProductos;
     private $socios = [];
     private $numSocios;
 
+    // CONSTRUCTOR
     public function __construct($nombre){
         $this->nombre = $nombre;
     }
 
+    // GETTERS Y SETTERS
     public function getSocios($num){
         return $this->socios[$num];
     }
 
+    /**
+     * Función incluirProducto
+     * Añade el Soporte a un Array de almacenaje
+     */
     private function incluirProducto(Soporte $s){
         array_push($this->productos,$s);
         $this->numProductos = count($this->productos);
     }
 
+    /**
+     * Funciones incluirCintaVideo, incluirDvd, incluirJuego
+     * Crea el nuevo Objeto y Llama a la Función incluiProducto
+     */
     public function incluirCintaVideo($titulo,$precio,$duracion){
         $cintaVideo = new CintaVideo($titulo,count($this->productos),$precio,$duracion);
         $this->incluirProducto($cintaVideo);
@@ -40,26 +55,38 @@ class VideoClub{
         $this->incluirProducto($Juego);
     }
 
+    /**
+     * Función incluirSocio
+     * Crea un nuevo Objeto:Cliente y lo añade al array de almacenaje de Socios
+     */
     public function incluirSocio($nombre,$maxAlquileresConcurrentes=3){
         $Socio = new Cliente($nombre,count($this->socios),$maxAlquileresConcurrentes);
         array_push($this->socios,$Socio);
         $this->numSocios = count($this->socios);
     }
 
+    // Función Lista de Productos
     public function listarProductos(){
         foreach ($this->productos as $id => $producto){
-            echo "<hr><h5>Producto ".$id.":<h5>";
+            echo "<hr><h5>Producto ".$id.":</h5>";
             $producto->muestraResumen();
         }
     }
 
+    // Función Lista de Socios
     public function listarSocios(){
         foreach ($this->socios as $id => $socio){
-            echo "<hr><h5>Socio ".$id.":<h5>";
+            echo "<hr><h5>Socio ".$id.":</h5>";
             $socio->muestraResumen();
         }
     }
 
+    /**
+     * Función alquilarSocioProducto
+     *  - Busca el Socio dentro del array socios
+     *  - Buesca el Soporte dentro del array productos
+     *  - Si encuentra ambas cosas ejecuta la función alquilar
+     */
     public function alquilarSocioProducto($numeroCliente, $numeroSoporte){
         $existesocio=false;
         $existeproducto=false;
@@ -74,6 +101,7 @@ class VideoClub{
                 }
             }
         }
+        // Indica los posibles errores de la función
         if (!$existesocio){
             echo "El Socio con el número ".$numeroCliente." no está registrado";
         }

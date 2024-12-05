@@ -1,18 +1,23 @@
 <?php
+// Definimos Namespace
 namespace Dwes\ProyectoVideoclub;
+// Definicion clase Cliente
 class Cliente {
+    // ATRIBUTOS
     public string $nombre;
     private int $numero;
     private $soportesAlquilados = [];
     private int $numSoportesAlquilados = 0;
     private int $maxAlquilerConcurrente;
 
+    // CONSTRUCTOR
     public function __construct($nombre,$numero,$maxAlquilerConcurrente = 3){
         $this->nombre = $nombre;
         $this->numero = $numero;
         $this->maxAlquilerConcurrente = $maxAlquilerConcurrente;
     }
-
+    
+    // GETTERS Y SETTERS
     public function getNumero(){
         return $this->numero;
     }
@@ -25,6 +30,10 @@ class Cliente {
         return count($this->soportesAlquilados);
     }
 
+    /**
+     * Función tieneAlquilado
+     * Comprueba si un cliente tiene alquilado un Soporte
+     */
     public function tieneAlquilado(Soporte $s):bool{
         foreach($this->soportesAlquilados as $soporte){
             if ($soporte->getNumero() == $s->getNumero()){
@@ -34,6 +43,13 @@ class Cliente {
         return false;
     }
 
+    /**
+     * Función alquilar
+     * Su función es comprobar si:
+     *  - El Cliente tiene alquilado un Soporte
+     *  - El Cliente puede alquilar más Soportes
+     *  - Alquiler de un Soporte por el Cliente
+     */
     public function alquilar(Soporte $s) {
         if((!$this->tieneAlquilado($s))&&($this->numSoportesAlquilados<$this->maxAlquilerConcurrente)){
             array_push($this->soportesAlquilados,$s);
@@ -47,6 +63,12 @@ class Cliente {
         return $this;
     }
 
+    /**
+     * Función devolver
+     * Comprueba si el Cliente tiene en alquiler el Soporte
+     *  - Sí: Lo devuelve
+     *  - No: Indica que no tiene ese Soporte alquilado
+     */
     public function devolver(int $numSoporte):bool {
         foreach($this->soportesAlquilados as $id => $soporte){
             if ($id == $numSoporte-1){
@@ -60,6 +82,7 @@ class Cliente {
         return false;
     }
 
+    // Función Lista los Soportes alquilados por el Cliente
     public function listaAlquileres():void{
         if ($this->numSoportesAlquilados > 0){
             echo "<br>El usuario: ".$this->nombre." tiene alquilados ".$this->numSoportesAlquilados." soportes";
@@ -72,9 +95,13 @@ class Cliente {
         }
     }
 
+    /**
+     * Función muestraResumen
+     * Resumen: Nombre + Alquileres Cliente
+     */
     public function muestraResumen(){
         echo "--------------------------------------------<br>";
-        echo "<strong>Nombre: ".$this->nombre."<strong><br>";
+        echo "<strong>Nombre: ".$this->nombre."</strong><br>";
         echo "Cantidad de Alquileres: ".count($this->soportesAlquilados)."<br>";
     }
 }
