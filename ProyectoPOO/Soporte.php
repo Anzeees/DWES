@@ -1,24 +1,17 @@
 <?php
-// Definimos el namespace
-namespace Dwes\ProyectoVideoclub;
-// Incluimos la interfaz Resumible
 include_once "Resumible.php";
-// Clase abstracta "Soporte" que implementa la interfaz Resumible
 abstract class Soporte implements Resumible{
-    // Atributos
     public string $titulo;
     protected int $numero;
     private float $precio;
     private static $IVA = 21;
 
-    // Constructor
     public function __construct($titulo,$numero,$precio){
         $this->titulo = $titulo;
         $this->numero = $numero;
         $this->precio = $precio;
     }
 
-    // Getters y Setters
     public function getPrecio(){
         return $this->precio;
     }
@@ -31,17 +24,13 @@ abstract class Soporte implements Resumible{
         return $this->numero;
     }
 
-    /**
-     * Función muestraResumen
-     * Resumen: Título, Número, Precio, Precio Con IVA, IVA
-     */
     public function muestraResumen(){
         echo "<br>------------------------------------------------<br>";
         echo "<strong>Título: ".$this->titulo."</strong><br>";
         echo "Número: ".$this->getNumero()."<br>";
         echo "Precio sin IVA: ".$this->getPrecio()." €<br>";
         echo "Precio con IVA: ".$this->getPrecioConIva()." €<br>";
-        echo "IVA: ".self::$IVA."%<br>"; // Muestra el porcentaje de IVA
+        echo "IVA: ".self::$IVA."%<br>";
     }
 }
 ?>
