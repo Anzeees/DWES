@@ -1,8 +1,6 @@
 <?php
 // Definimos Namespace
-namespace Dwes\ProyectoVideoclub;
-// Incluimos Clases/Interfaces
-include_once "Resumible.php";
+namespace app\Dwes\ProyectoVideoclub;
 
 // Definición clase abstracta Soporte
 abstract class Soporte implements Resumible{

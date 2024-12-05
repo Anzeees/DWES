@@ -1,8 +1,6 @@
 <?php
 // Definimos Namespace
-namespace Dwes\ProyectoVideoclub;
-// Incluimos Clases/Interfaces
-include_once "Soporte.php";
+namespace app\Dwes\ProyectoVideoclub;
 
 // Definicion clase Juego extiende Soporte
 class Juego extends Soporte {

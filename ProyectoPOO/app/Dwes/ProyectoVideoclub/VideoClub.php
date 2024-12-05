@@ -1,12 +1,6 @@
 <?php
 // Definimos Namespace
-namespace Dwes\ProyectoVideoclub;
-// Incluimos Clases/Interfaces
-include_once "Soporte.php";
-include_once "Juego.php";
-include_once "CintaVideo.php";
-include_once "Dvd.php";
-include_once "Cliente.php";
+namespace app\Dwes\ProyectoVideoclub;
 
 // Definición clase VideoClub
 class VideoClub{

@@ -1,7 +1,8 @@
 <?php
-include_once "Dwes\ProyectoVideoclub\VideoClub.php";
+// Incluimos el Autoload para cargar todo el contenido
+include_once "..\autoload.php";
 
-use Dwes\ProyectoVideoclub\VideoClub;
+use app\Dwes\ProyectoVideoclub\VideoClub;
 
 // Creamos El VideoClub
 echo "<h4>Creando VideoClub...</h4>";

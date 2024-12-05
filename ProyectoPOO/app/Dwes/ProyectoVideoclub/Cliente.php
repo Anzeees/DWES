@@ -1,6 +1,6 @@
 <?php
 // Definimos Namespace
-namespace Dwes\ProyectoVideoclub;
+namespace app\Dwes\ProyectoVideoclub;
 // Definicion clase Cliente
 class Cliente {
     // ATRIBUTOS

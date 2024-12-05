@@ -1,8 +1,9 @@
 <?php
 // Definimos Namespace
-namespace Dwes\ProyectoVideoclub;
+namespace app\Dwes\ProyectoVideoclub;
 // Incluimos Clases/Interfaces
 include_once "Soporte.php";
+// include_once "..\autoload.php";
 
 // Definición clase CintaVideo extiende Soporte
 class CintaVideo extends Soporte {
