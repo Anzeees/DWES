@@ -1,11 +1,10 @@
 <?php
-namespace Dwes\ProyectoVideoclub;
 include_once "Soporte.php";
 include_once "Juego.php";
 include_once "CintaVideo.php";
 include_once "Dvd.php";
 include_once "Cliente.php";
-class VideoClub {
+class VideoClub{
     private string $nombre;
     private $productos = [];
     private int $numProductos;
@@ -76,7 +75,6 @@ class VideoClub {
         if (!$existeproducto){
             echo "El Soporte con el número ".$numeroSoporte." no está en tienda";
         }
-        return $this;
     }
 }
 ?>
