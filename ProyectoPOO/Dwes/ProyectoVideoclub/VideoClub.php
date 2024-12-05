@@ -1,4 +1,5 @@
 <?php
+namespace Dwes\ProyectoVideoclub;
 include_once "Soporte.php";
 include_once "Juego.php";
 include_once "CintaVideo.php";
@@ -13,6 +14,10 @@ class VideoClub{
 
     public function __construct($nombre){
         $this->nombre = $nombre;
+    }
+
+    public function getSocios($num){
+        return $this->socios[$num];
     }
 
     private function incluirProducto(Soporte $s){
