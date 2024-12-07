@@ -1,6 +1,8 @@
 <?php
 // Definimos Namespace
 namespace app\Dwes\ProyectoVideoclub;
+
+use app\Dwes\ProyectoVideoclub\SoporteNoEncontradoException;
 // Definicion clase Cliente
 class Cliente {
     // ATRIBUTOS
@@ -30,6 +32,9 @@ class Cliente {
         return count($this->soportesAlquilados);
     }
 
+    public function getSoportesAlquilados(){
+        return $this->soportesAlquilados;
+    }
     /**
      * Función tieneAlquilado
      * Comprueba si un cliente tiene alquilado un Soporte
@@ -51,14 +56,17 @@ class Cliente {
      *  - Alquiler de un Soporte por el Cliente
      */
     public function alquilar(Soporte $s) {
-        if((!$this->tieneAlquilado($s))&&($this->numSoportesAlquilados<$this->maxAlquilerConcurrente)){
+        if((!$this->tieneAlquilado($s))&&($this->numSoportesAlquilados<$this->maxAlquilerConcurrente)&&(!$s->alquilado)){
             array_push($this->soportesAlquilados,$s);
             $this->numSoportesAlquilados++;
             echo "<br>Alquiler ".$s->titulo. " ACEPTADO para ".$this->nombre;
-        } else if($this->tieneAlquilado($s)){
-            echo "<br>El usuario ".$this->nombre." ya tiene ".$s->titulo." alquilado";
-        } else if($this->numSoportesAlquilados > $this->maxAlquilerConcurrente){
-            echo "<br>El usuario ".$this->nombre." no puede hacer más alquileres";
+            $s->alquilado=true;
+        } else if(($this->tieneAlquilado($s))||($s->alquilado)){
+            throw new SoporteYaAlquiladoException($s->titulo);
+            // echo "<br>El usuario ".$this->nombre." ya tiene ".$s->titulo." alquilado";
+        } else if($this->numSoportesAlquilados >= $this->maxAlquilerConcurrente){
+            throw new CupoSuperadoException();
+            // echo "<br>El usuario ".$this->nombre." no puede hacer más alquileres";
         }
         return $this;
     }
@@ -69,14 +77,16 @@ class Cliente {
      *  - Sí: Lo devuelve
      *  - No: Indica que no tiene ese Soporte alquilado
      */
-    public function devolver(int $numSoporte):bool {
-        foreach($this->soportesAlquilados as $id => $soporte){
-            if ($id == $numSoporte-1){
+    public function devolver(int $numSoporte) {
+        $id = 0;
+        foreach($this->soportesAlquilados as $soporte){
+            if ($soporte->getNumero() == $numSoporte){
                 unset($this->soportesAlquilados[$id]);
                 $this->numSoportesAlquilados=count($this->soportesAlquilados);
-                echo "<br>El producto con numero ".$numSoporte." ha sido eliminado de la lista de alquiles";
+                echo "<br>El producto con numero ".$numSoporte." ha sido eliminado de la lista de alquileres";
                 return true;
             }
+            $id++;
         }
         echo "<br>En la lista de alquileres del cliente: ".$this->nombre." no se ha encontrado este Soporte";
         return false;

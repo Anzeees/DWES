@@ -9,6 +9,7 @@ abstract class Soporte implements Resumible{
     protected int $numero;
     private float $precio;
     private static $IVA = 21;
+    public $alquilado=false;
 
     // CONSTRUCTOR
     public function __construct($titulo,$numero,$precio){
@@ -29,7 +30,7 @@ abstract class Soporte implements Resumible{
     public function getNumero(){
         return $this->numero;
     }
-
+    
     /**
      * Función muestraResumen
      * Resumen: Título, Precio, PrecioConIva e IVA
