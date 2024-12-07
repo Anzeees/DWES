@@ -5,7 +5,7 @@ use app\Dwes\ProyectoVideoclub\VideoclubException;
 
 class SoporteNoEncontradoException extends VideoclubException {
     public function __construct($soporte){
-        parent::setError("<br>El Soporte '".$soporte."' no existe.<br>");
+        parent::setError("<p style='color:red;'>El Soporte '".$soporte."' no existe.</p>");
     }
 }
 ?>

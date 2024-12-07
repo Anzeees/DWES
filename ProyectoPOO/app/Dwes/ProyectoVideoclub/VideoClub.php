@@ -211,7 +211,7 @@ class VideoClub {
     public function imprimirProductosAlquilados(){
         foreach ($this->productos as $producto){
             if ($producto->alquilado){
-                echo "<p style='color:red;'>".$producto->getNumero();
+                echo "<p style='color:red;'>".$producto->getNumero()."</p>";
             }
         }
     }

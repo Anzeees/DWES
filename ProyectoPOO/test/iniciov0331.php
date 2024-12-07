@@ -2,11 +2,8 @@
 // Incluimos el Autoload para cargar todo el contenido
 include_once "..\autoload.php";
 
-use app\Dwes\ProyectoVideoclub\SoporteException;
-use app\Dwes\ProyectoVideoclub\CupoSuperadoException;
-use app\Dwes\ProyectoVideoclub\SoporteYaAlquiladoException;
-use app\Dwes\ProyectoVideoclub\ClienteNoEncontradoException;
-use app\Dwes\ProyectoVideoclub\VideoClub;
+use \app\Dwes\ProyectoVideoclub\VideoclubException;
+use \app\Dwes\ProyectoVideoclub\VideoClub;
 
 // Creamos El VideoClub
 // $excepcion = new CupoSuperadoException();
@@ -44,7 +41,6 @@ $videoclub->listarSocios();
 echo "<h4>Aplicamos Devoluciones...</h4>";
 
 $videoclub->devolverSocioProducto(0, 1)->devolverSocioProducto(0, 2);
-// $videoclub->devolverSocioProducto(0, 2);
 $videoclub->alquilarSocioProducto(1, 1);
 
 echo "<h2>Listado Clientes</h2>";
@@ -53,5 +49,4 @@ $videoclub->listarSocios();
 $arrayProductos=[0,1,2];
 $videoclub->alquilarSocioProductos(1,$arrayProductos)->devolverSocioProductos(1,$arrayProductos);
 $videoclub->listarSocios();
-// $videoclub->devolverSocioProductos(1,$arrayProductos);
 ?>
